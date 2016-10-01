@@ -1,0 +1,19 @@
+{
+    "auto_complete": true,
+    "auto_complete_commit_on_tab": true,
+    "check_for_rvm": true,
+    "color_scheme": "Packages/Material Theme/schemes/Material-Theme.tmTheme",
+    "copy_with_empty_selection": true,
+    "ensure_newline_at_eof_on_save": true,
+    "font_size": 12,
+    "ignored_packages":
+    [
+        "Color Highlighter",
+        "Vintage"
+    ],
+    "index_files": true,
+    "show_full_path": true,
+    "tab_size": 2,
+    "theme": "Material-Theme.sublime-theme",
+    "translate_tabs_to_spaces": true
+}

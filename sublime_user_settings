@@ -1,0 +1,18 @@
+{
+  "detect_indentation": true,
+  "ensure_newline_at_eof_on_save": true,
+  "folder_exclude_patterns":
+  [
+    "tmp",
+    "node_modules"
+  ],
+  "font_size": 13,
+  "ignored_packages":
+  [
+    "Materialize",
+    "Vintage"
+  ],
+  "show_full_path": true,
+  "tab_size": 2,
+  "translate_tabs_to_spaces": true
+}

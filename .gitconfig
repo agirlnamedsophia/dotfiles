@@ -1,0 +1,20 @@
+
+[hub]
+protocol = https
+
+[user]
+	name = agirlnamedsophia
+ email = sophia.russell@betterment.com
+[push]
+	default = simple
+[core]
+	excludesfile = /Users/sophiarussell/.gitignore_global
+	hooksPath = /Users/sophiarussell/.git-templates/hooks
+	editor = /usr/bin/vim
+[credential]
+	helper = osxkeychain
+[url "ssh://git@github.com"]
+	insteadOf = https://github.com
+
+[commit]
+  verbose = true

@@ -51,7 +51,7 @@ ZSH_THEME="crcandy"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=( git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git aws history ruby bundler)
+plugins=(git aws history ruby bundler kubectl)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -64,19 +64,16 @@ source $ZSH/oh-my-zsh.sh
 
 # aliases
 alias zshconfig="source ~/.zshrc"
-alias core="cd ~/src/better-core"
-alias r="cd ~/src/better-core/retail"
-alias rc="cd ~/src/better-core/retail_core"
-alias restart-nginx="sudo nginx -s quit && sudo nginx"
+alias custody="cd ~/src/custody"
+alias retail="cd ~/src/retail"
+alias r="cd ~/src/retail/retail"
+alias rc="cd ~/src/retail/retail_core"
 alias istanbul="cd ~/src/istanbul && ./run-local.sh"
-alias cst="cd ~/src/better-core/cst"
+alias cst="cd ~/src/retail/cst"
 alias cst-start="cst && foreman start web"
-alias bd="cd ~/src/better-core/broker_dealer"
-alias bdc="cd ~/src/better-core/broker_dealer_core"
+alias bd="cd ~/src/retail/broker_dealer"
+alias bdc="cd ~/src/retail/broker_dealer_core"
 alias blurbs="cd ~/src/blurbs"
-alias nginx="cd /opt/boxen/config/nginx"
-alias cdbox="cd /opt/boxen/repo"
-alias resetboxen="cd /opt/boxen/repo && git reset --hard origin/master && boxen"
 alias gdb="git delete-branch"
 alias gcp="git cherry-pick"
 alias zc="rails console"
@@ -84,13 +81,17 @@ alias zmig="rake db:migrate"
 alias b4b="cd ~/src/for_business/b4b"
 alias engops="cd ~/src/eng-ops"
 alias tt="cd ~/src/test_track"
-alias rrsubl="cd ~/src/better-core && subl retail retail_core"
+alias rrsubl="cd ~/src/retail && subl retail retail_core"
 alias nanda="cd ~/src/nanda"
 alias climber="cd ~/www/Climber"
 alias rondo="cd ~/src/coach/rondo"
 alias coach="cd ~/src/coach/coach"
 alias blog="cd ~/www/bettermentblogposts"
 alias woodshed="cd ~/src/woodshed"
+alias shipyard="cd ~/src/shipyard"
+alias fizzbuzzsophia="cd $HOME/www/fizzbuzzsophia"
+#alias sopsorific="cd ~/go/src/github.com/Betterment/sopsorific"
+alias legacy-deploy="cd ~/src/legacy-deploy"
 
 alias tcstart="$CATALINASH start"
 alias tcrun="$CATALINASH run"
@@ -101,19 +102,14 @@ alias tclog="tail -f $TOMCAT_BASE/logs/catalina.out"
 alias clean-build="gradle clean ruby web-api:war"
 alias clean-debug="clean-build && tcdebug"
 alias clean-start="clean-build && tcrun"
-
-alias myrondo="BUNDLE_GEMFILE=$HOME/src/coach/rondo/Gemfile bundle exec rondo"
+alias mycoach="RBENV_VERSION=$(cat $HOME/src/coach/coach_cli/.ruby-version) BUNDLE_GEMFILE=$HOME/src/coach/coach_cli/Gemfile bundle exec $HOME/src/coach/coach_cli/exe/coach"
+alias myterra="RBENV_VERSION=$(cat $HOME/src/shipyard/terraforeman/.ruby-version) BUNDLE_GEMFILE=$HOME/src/shipyard/terraforeman/Gemfile bundle exec $HOME/src/shipyard/terraforeman/exe/terraforeman"
 
 alias prod-encrypt="pbpaste | ansible-vault encrypt_string --vault-password-file=~/ansible-vault/production.key"
 alias prod-decrypt="pbpaste | sed 's/^[[:space:]]*//g' | ansible-vault decrypt --vault-password-file=~/ansible-vault/production.key /dev/stdin --output=-"
 alias dev-encrypt="pbpaste | ansible-vault encrypt_string --vault-password-file=~/ansible-vault/development.key"
 alias dev-decrypt="pbpaste | sed 's/^[[:space:]]*//g' | ansible-vault decrypt --vault-password-file=~/ansible-vault/development.key /dev/stdin --output=-"
 
-alias fizz="cd $HOME/www/fizzbuzzsophia"
-
-# give the VM a semi-ridiculous amount of memory.
-#LOTS_O_MEM='-Xms1g -Xmx1g -XX:+HeapDumpOnOutOfMemoryError'
-#GC_PERMGEN='-XX:+CMSClassUnloadingEnabled -XX:+UseConcMarkSweepGC'
 
 #test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 
@@ -130,12 +126,9 @@ ssh_to_instance () {
 
 source "$HOME/.bootstrap/env.sh"
 
-eval "$(direnv hook zsh)"
+#eval "$(direnv hook zsh)"
 
 GOPATH=~/go
-#export JAVA_OPTS="$LOTS_O_MEM $GC_PERMGEN"
-#export GRADLE_OPTS="$LOTS_O_MEM $GC_PERMGEN"
-#export ANT_OPTS="$LOTS_O_MEM $GC_PERMGEN"
 export TOMCAT_BASE="~/my/toolbox/tomcat-6.0.18"
 export CATALINASH="$TOMCAT_BASE/bin/catalina.sh"
 export GOPATH=${HOME}/go
@@ -144,3 +137,9 @@ export LUIGI_CONFIG_PATH=~/luigi.cfg
 export PATH=/Applications/Sublime\ Text\ 2.app/Contents/SharedSupport/bin:$PATH
 export PATH="/usr/local/sbin:$PATH"
 export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
+export PATH="/usr/local/opt/openssl/bin:$PATH"
+export PATH="/usr/local/opt/libxml2/bin:$PATH"
+
+export PATH="/usr/local/bin:$PATH"
+
+source ~/oh-my-git-aliases.sh

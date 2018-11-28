@@ -86,8 +86,8 @@ alias tt="cd ~/src/test_track"
 alias rrsubl="cd ~/src/retail && subl retail retail_core"
 alias nanda="cd ~/src/nanda"
 alias climber="cd ~/www/Climber"
-alias rondo="cd ~/src/coach/rondo"
-alias coach="cd ~/src/coach/coach"
+
+#alias coach="cd ~/src/coach/coach"
 alias blog="cd ~/www/bettermentblogposts"
 alias woodshed="cd ~/src/woodshed"
 alias shipyard="cd ~/src/shipyard"
@@ -126,7 +126,7 @@ ssh_to_instance () {
 
 source "$HOME/.bootstrap/env.sh"
 
-eval "$(direnv hook zsh)"
+eval "$(rbenv init -)"
 
 GOPATH=~/go
 export TOMCAT_BASE="~/my/toolbox/tomcat-6.0.18"

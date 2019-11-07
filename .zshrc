@@ -86,6 +86,7 @@ alias tt="cd ~/src/test_track"
 alias rrsubl="cd ~/src/retail && subl retail retail_core"
 alias nanda="cd ~/src/nanda"
 alias climber="cd ~/www/Climber"
+alias pulls="open https://github.com/pulls"
 
 #alias coach="cd ~/src/coach/coach"
 alias blog="cd ~/www/bettermentblogposts"
@@ -105,13 +106,24 @@ alias clean-build="gradle clean ruby web-api:war"
 alias clean-debug="clean-build && tcdebug"
 alias clean-start="clean-build && tcrun"
 
+alias myrudder="RBENV_VERSION=$(cat $HOME/src/rudder/.ruby-version) BUNDLE_GEMFILE=$HOME/src/rudder/Gemfile bundle exec $HOME/src/rudder/exe/rudder"
 alias mycoach="RBENV_VERSION=$(cat $HOME/src/coach/coach_cli/.ruby-version) BUNDLE_GEMFILE=$HOME/src/coach/coach_cli/Gemfile bundle exec $HOME/src/coach/coach_cli/exe/coach"
+alias mydatadog="RBENV_VERSION=$(cat $HOME/src/datadog_tools/.ruby-version) BUNDLE_GEMFILE=$HOME/src/datadog_tools/Gemfile bundle exec $HOME/src/datadog_tools/exe/datadog_tools"
 alias myterra="RBENV_VERSION=$(cat $HOME/src/shipyard/terraforeman/.ruby-version) BUNDLE_GEMFILE=$HOME/src/shipyard/terraforeman/Gemfile bundle exec $HOME/src/shipyard/terraforeman/exe/terraforeman"
 
 alias prod-encrypt="pbpaste | ansible-vault encrypt_string --vault-password-file=~/ansible-vault/production.key"
 alias prod-decrypt="pbpaste | sed 's/^[[:space:]]*//g' | ansible-vault decrypt --vault-password-file=~/ansible-vault/production.key /dev/stdin --output=-"
 alias dev-encrypt="pbpaste | ansible-vault encrypt_string --vault-password-file=~/ansible-vault/development.key"
 alias dev-decrypt="pbpaste | sed 's/^[[:space:]]*//g' | ansible-vault decrypt --vault-password-file=~/ansible-vault/development.key /dev/stdin --output=-"
+
+alias wp-prod-encrypt="pbpaste | ansible-vault encrypt_string --vault-password-file=~/ansible-vault/brochure-production.key"
+alias wp-prod-decrypt="pbpaste | sed 's/^[[:space:]]*//g' | ansible-vault decrypt --vault-password-file=~/ansible-vault/brochure-production.key /dev/stdin --output=-"
+alias wp-dev-encrypt="pbpaste | ansible-vault encrypt_string --vault-password-file=~/ansible-vault/brochure-development.key"
+alias wp-dev-decrypt="pbpaste | sed 's/^[[:space:]]*//g' | ansible-vault decrypt --vault-password-file=~/ansible-vault/brochure-development.key /dev/stdin --output=-"
+
+alias prod-gm-encrypt="pbpaste | ansible-vault encrypt_string --vault-password-file=~/ansible-vault/prod-grandmaster.pem"
+alias prod-gm-decrypt="pbpaste | sed 's/^[[:space:]]*//g' | ansible-vault decrypt --vault-password-file=~/ansible-vault/prod-grandmaster.pem /dev/stdin --output=-"
+alias sopsorific="secret_editor"
 
 find_replace () {
   dir=$1
@@ -122,6 +134,17 @@ find_replace () {
 
 ssh_to_instance () {
   bssh "$(aws ec2 describe-instances --instance-id "$1" | jq -r '.Reservations[0].Instances[0].PrivateIpAddress')"
+}
+
+gopen() {
+  repo_name="$(basename `git rev-parse --show-toplevel`)"
+  open "https://github.com/Betterment/${repo_name}"
+}
+
+openpr() {
+  repo_name="$(basename `git rev-parse --show-toplevel`)"
+  current_branch="$(git rev-parse --abbrev-ref HEAD)"
+  open "https://github.com/Betterment/${repo_name}/pull/new/${current_branch}"
 }
 
 source "$HOME/.bootstrap/env.sh"
@@ -140,4 +163,22 @@ export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
 export PATH="/usr/local/opt/openssl/bin:$PATH"
 export PATH="/usr/local/opt/libxml2/bin:$PATH"
 export PATH="/usr/local/bin:$PATH"
+export PATH="$HOME/.jenv/bin:$PATH"
 source ~/oh-my-git-aliases.sh
+export PATH=$HOME/bin:$PATH
+
+# tabtab source for serverless package
+# uninstall by removing these lines or running `tabtab uninstall serverless`
+[[ -f /usr/local/lib/node_modules/serverless/node_modules/tabtab/.completions/serverless.zsh ]] && . /usr/local/lib/node_modules/serverless/node_modules/tabtab/.completions/serverless.zsh
+# tabtab source for sls package
+# uninstall by removing these lines or running `tabtab uninstall sls`
+[[ -f /usr/local/lib/node_modules/serverless/node_modules/tabtab/.completions/sls.zsh ]] && . /usr/local/lib/node_modules/serverless/node_modules/tabtab/.completions/sls.zsh
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+# tabtab source for slss package
+# uninstall by removing these lines or running `tabtab uninstall slss`
+[[ -f /Users/sophiarussell/src/goats/volume-snapshot-tagging/node_modules/tabtab/.completions/slss.zsh ]] && . /Users/sophiarussell/src/goats/volume-snapshot-tagging/node_modules/tabtab/.completions/slss.zsh
+
+export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm

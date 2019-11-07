@@ -18,3 +18,10 @@ protocol = https
 
 [commit]
   verbose = true
+[alias]
+	sl = log --oneline --decorate -20
+	dlog = log --oneline --decorate -20
+	dlog-all = log --oneline --decorate --graph --all -20
+	slaplog = log --oneline --decorate --graph --all
+[init]
+	templatedir = /Users/sophiarussell/.git-templates
